@@ -9,5 +9,5 @@ class Question extends Model
 {
     public $timestamps = false;
     use HasFactory;
-    protected $fillable = ["question","answer", "level"];
+    protected $fillable = ["question","answer", ];
 }
