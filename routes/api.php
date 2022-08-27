@@ -1,8 +1,9 @@
 <?php
 
+use App\Models\Question;
+use App\Http\Controllers\QuestionApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Models\Question;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,25 +21,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::get("/questions", function(){
-    return Question::all();
-});
+Route::get("/questions", [QuestionApiController::class, 'index']);
 
 
-Route::post('/questions', function(){
-    request()->validate([
-        'question' => 'required',
-        'answer' => 'required',
-
-    ]);
-    return Question::create([
-        'question' => request('question'),
-        'answer' => request('answer'),
-        'level' => null,
-
-    ]
-);
-});
+Route::post('/questions', [QuestionApiController::class, 'add']);
 
 
 Route::put('/questions/{question}',function(Question $question){
