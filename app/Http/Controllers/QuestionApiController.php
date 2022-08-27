@@ -27,4 +27,29 @@ class QuestionApiController extends Controller
 
         ]);
     }
+    public function update(Question $question ){
+        request()->validate([
+            'question' => 'required',
+            'answer' => 'required',
+
+        ]);
+
+      $success =  $question->update([
+            'question' => request('question'),
+            'answer' => request('answer'),
+        ]);
+
+        return [
+            'success' => $success
+        ];
+
+    }
+
+    public function delete(Question $question){
+        $success = $question->delete();
+        return [
+         'success' => $success
+     ];
+    }
+
 }

@@ -27,26 +27,6 @@ Route::get("/questions", [QuestionApiController::class, 'index']);
 Route::post('/questions', [QuestionApiController::class, 'add']);
 
 
-Route::put('/questions/{question}',function(Question $question){
-    request()->validate([
-        'question' => 'required',
-        'answer' => 'required',
+Route::put('/questions/{question}',[QuestionApiController::class, 'update']);
 
-    ]);
-
-  $success =  $question->update([
-        'question' => request('question'),
-        'answer' => request('answer'),
-    ]);
-
-    return [
-        'success' => $success
-    ];
-});
-
-Route::delete('/questions/{question}',function(Question $question){
-   $success = $question->delete();
-   return [
-    'success' => $success
-];
-});
+Route::delete('/questions/{question}',[QuestionApiController::class, 'delete']);
